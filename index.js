@@ -5,7 +5,7 @@ class Musician extends Model {}
 Musician.init(
   {
     name: DataTypes.STRING,
-    instrument: DataTypes.STRING,
+    type: DataTypes.STRING,
   },
   {
     sequelize,
@@ -13,4 +13,17 @@ Musician.init(
   }
 );
 
-module.exports = { Musician };
+class Instrument extends Model {}
+
+Instrument.init(
+  {
+    name: DataTypes.STRING,
+    type: DataTypes.STRING,
+  },
+  {
+    sequelize,
+    timestamps: false,
+  }
+);
+
+module.exports = { Musician, Instrument };
