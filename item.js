@@ -1,22 +1,21 @@
-const { sequelize, DataTypes, Model } = require("./sequelize_index");
+const {sequelize, DataTypes, Model} = require('./sequelize_index');
 
 /**
  * Represents a Restaurant
  */
 class Item extends Model {
-  // add methods here
+
+    // add methods here
+
 }
-Item.init(
-  {
+Item.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
-  },
-  {
+}, {
     sequelize,
     timestamps: false,
-  }
-);
+});
 
 module.exports = {
-  Item
+    Item
 };
