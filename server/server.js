@@ -1,11 +1,12 @@
 const express = require("express");
 const path = require("path"); //node native module path
+const { Restaurant } = require("../src/restaurant");
 
 const app = express();
 const port = 3000;
 
 //points toward folder of static files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static('../public'));
 
 //GET method on /restaurants route returns all restaurants
 app.get('/restaurants', async (req,res) => {
