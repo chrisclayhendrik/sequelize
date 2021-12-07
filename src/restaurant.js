@@ -1,27 +1,28 @@
-const {sequelize, DataTypes, Model} = require('./sequelize_index');
-const { Menu } = require('./menu')
+const { sequelize, DataTypes, Model } = require("./sequelize_index");
+const { Menu } = require("./menu");
 
 /**
  * Represents a Restaurant
  */
 class Restaurant extends Model {
-// add methods here
-    
-    
+  // add methods here
 }
-Restaurant.init({
+Restaurant.init(
+  {
     name: DataTypes.STRING,
     location: DataTypes.STRING,
     cuisine: DataTypes.STRING,
-}, {
+  },
+  {
     sequelize,
     timestamps: false,
-    
-});
+    logging: false,
+  }
+);
 
-Restaurant.hasMany(Menu, {as: 'menus', foreignKey: 'restaurant_id'});
-Menu.belongsTo(Restaurant, {foreignKey: 'restaurant_id'});
+Restaurant.hasMany(Menu, { as: "menus", foreignKey: "restaurant_id" });
+Menu.belongsTo(Restaurant, { foreignKey: "restaurant_id" });
 
 module.exports = {
-    Restaurant
+  Restaurant,
 };
