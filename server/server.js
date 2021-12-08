@@ -9,7 +9,7 @@ const port = 3000;
 app.use(express.json());
 
 //points toward folder of static files
-app.use(express.static("../public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 //GET method on /restaurants route returns all restaurants
 app.get("/restaurants", async (req, res) => {
