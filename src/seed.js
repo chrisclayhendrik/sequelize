@@ -1,7 +1,7 @@
 // const {sequelize} = require('./sequelize_index')
-// const { Restaurant } = require('./restaurant')
-// const { Menu } = require('./menu')
-// const { Item } = require('./item')
+// const { Restaurant } = require('./models/restaurant')
+// const { Menu } = require('./models/menu')
+// const { Item } = require('./models/item')
 // //Q: Why do you think each object inside of the arrays are structured the way that they are?
 // //Q: What do you think will happen when we 'seed' this file?
 // const seedRestaurant = [

@@ -1,11 +1,12 @@
 const express = require("express");
 const path = require("path"); //node native module path
-const { Restaurant } = require("../src/restaurant");
-const { Menu } = require("../src/menu");
-const { Item } = require("../src/item");
+const { Restaurant } = require("../src/models/restaurant");
+const { Menu } = require("../src/models/menu");
+const { Item } = require("../src/models/item");
 
 const app = express();
 const port = 3000;
+app.use(express.json());
 
 //points toward folder of static files
 app.use(express.static("../public"));
@@ -21,6 +22,25 @@ app.get("/restaurants", async (req, res) => {
 app.get("/restaurants/:id", async (req, res) => {
   const restaurant = await Restaurant.findByPk(req.params.id);
   res.json(restaurant);
+});
+
+app.put("/restaurants/:id", async (req, res) => {
+  let updatedRestaurant = await Restaurant.update(req.body, {
+    where: {id: req.params.id}
+  });
+  res.send("Updated!");
+});
+
+// delete one Restaurant by id
+app.delete("/restaurants/:id", async (req, res) => {
+  const deleted = await Restaurant.destroy({
+    where: { id: req.params.id },
+  });
+  let deleteReport = "Deletion failed";
+  if (deleted) {
+    deleteReport = "Deletion successful";
+  }
+  res.send(deleteReport);
 });
 
 app.get("/menus", async (req, res) => {

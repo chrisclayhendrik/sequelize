@@ -1,7 +1,7 @@
 const { sequelize } = require("../src/sequelize_index");
-const { Restaurant } = require("../src/restaurant");
-const { Menu } = require("../src/menu");
-const { Item } = require("../src/item");
+const { Restaurant } = require("../src/models/restaurant");
+const { Menu } = require("../src/models/menu");
+const { Item } = require("../src/models/item");
 
 describe("Restaurant", () => {
   /**
@@ -75,8 +75,8 @@ describe("Restaurant", () => {
     expect(items[0].name).toBe("Eggs");
   });
 
-//   afterAll(async () => {
-//     await sequelize.sync({ force: true });
-//     sequelize.close();
-//   });
- });
+    // afterAll(async () => {
+    //   await sequelize.sync({ force: true });
+    //   sequelize.close();
+    // });
+});

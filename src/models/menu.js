@@ -1,4 +1,4 @@
-const { sequelize, DataTypes, Model } = require("./sequelize_index");
+const { sequelize, DataTypes, Model } = require("../sequelize_index");
 const { Item } = require("./item");
 
 /**
