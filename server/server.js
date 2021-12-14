@@ -1,4 +1,9 @@
 const express = require("express");
+const Handlebars = require("handlebars");
+const expressHandlebars = require("express-handlebars");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 const path = require("path"); //node native module path
 const { Restaurant } = require("../src/models/restaurant");
 const { Menu } = require("../src/models/menu");
@@ -8,20 +13,32 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 
+//set up our templating engine
+const handlebars = expressHandlebars({
+  handlebars: allowInsecurePrototypeAccess(Handlebars),
+});
+app.engine("handlebars", handlebars);
+app.set("view engine", "handlebars");
+
+//support the parsing of incoming requests with urlencoded payloads (e.g. form POST)
+app.use(express.urlencoded({ extended: true }));
+//support the parsing of incoming requests with json payloads
+app.use(express.json());
+
 //points toward folder of static files
 app.use(express.static(path.join(__dirname, "../public")));
 
 //GET method on /restaurants route returns all restaurants
-app.get("/restaurants", async (req, res) => {
+app.get("/web/restaurants", async (req, res) => {
   //find all instances of the Model Restaurant
-  const allRestaurants = await Restaurant.findAll();
+  const restaurants = await Restaurant.findAll();
   //respond with allRestaurants as a json objeect
-  res.json(allRestaurants);
+  res.render("restaurants", { restaurants });
 });
 
-app.get("/restaurants/:id", async (req, res) => {
+app.get("/web/restaurants/:id", async (req, res) => {
   const restaurant = await Restaurant.findByPk(req.params.id);
-  res.json(restaurant);
+  res.render("restaurant", { restaurant });
 });
 
 app.post("/restaurants", async (req, res) => {
